@@ -35,15 +35,16 @@ var lazyload = (function() {
         if (xhr.status === 200) {
             return JSON.parse(xhr.responseText)
         } else {
-          console.log(xhr.status)
-          return []
+            console.log(xhr.status)
+            return []
         }
 
 
     }
 
     var rander = function(count) {
-        var container = $('div.img-wrapper'),
+        var container = $('.img-wrapper'),
+            count = count < data.length ? count : data.length,
             dataToLoad = Array.prototype.concat.call(data.splice(0, count))
 
         for (var imgSrc of dataToLoad) {
@@ -53,9 +54,11 @@ var lazyload = (function() {
                 'class': 'img-item'
             })
             setAttributes(imgTag, {
-                'class': 'lazyload',
-                'src': imgSrc
+                'class': 'lazyload loading',
+                'src': imgSrc,
+                'onload': 'lazyload.display(this)'
             })
+
             imgItemDiv.appendChild(imgTag)
             container.appendChild(imgItemDiv)
         }
@@ -63,25 +66,26 @@ var lazyload = (function() {
         dataToLoad = []
     }
 
-    var load = (function() {
+    var load = function() {
+      if (isInViewport($('.img-wrapper').lastElementChild)) {
+          rander(8)
+      }
+    }
 
-        return function() {
+    var display = function(node) {
+        node.classList.remove('loading')
+        node.removeEventListener('load', display)
+    }
 
-            if (isInViewport($('.img-wrapper').lastElementChild)) {
-              rander(8)
-            }
-        }
-
-    }())
-
-    var init = function () {
-      window.addEventListener('load', lazyload.rander(12))
-      window.addEventListener('scroll', lazyload.load)
+    var init = function() {
+        window.addEventListener('load', lazyload.rander(12))
+        window.addEventListener('scroll', lazyload.load)
     }
 
     return {
-      init: init,
-      rander: rander,
-      load: load
+        init: init,
+        rander: rander,
+        load: load,
+        display: display
     }
 }())
