@@ -1,0 +1,32 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.img-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.img-item {
+  margin-top: 20px;
+  height: 320px;
+  width: 240px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 6px #666;
+  overflow: hidden;
+}
+
+.img-item img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  transition: ease-in-out .4s;
+}
+
+.img-item img:hover {
+  transform: scale(1.05) translate(-50%, -50%);
+}
