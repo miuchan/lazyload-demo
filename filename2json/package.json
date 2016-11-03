@@ -1,0 +1,17 @@
+{
+  "name": "filename2json",
+  "version": "0.0.1",
+  "description": "A command-line tool used to output filename list.",
+  "main": "index.js",
+  "bin": {
+    "filename2json": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "miuchan",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
+}
