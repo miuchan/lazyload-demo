@@ -21,14 +21,21 @@
 }
 
 .img-item img {
+
   position: relative;
   top: 50%;
   left: 50%;
   width: 100%;
+  opacity: 1;
   transform: translate(-50%, -50%);
-  transition: ease-in-out .4s;
+  transition: transform ease-in-out .4s, opacity ease-in .4s;
+}
+
+.img-item img.loading {
+
+  opacity: 0;
 }
 
 .img-item img:hover {
-  transform: scale(1.05) translate(-50%, -50%);
+  transform: scale(1.02) translate(-50%, -50%);
 }
