@@ -4,20 +4,6 @@ var lazyload = (function() {
             return document.querySelector(selector)
         }
 
-    // function addEventListener(ele, event, handler) {
-    //     var addEventListener
-    //
-    //     if (ele.addEventListener) {
-    //         addEventListener = ele.addEventListener(event, handler)
-    //     } else if (ele.attachEvent) {
-    //         addEventListener = ele.attachEvent('on' + event, handler)
-    //     } else {
-    //         ele['on' + event] = handler
-    //     }
-    //
-    //     return addEventListener
-    // }
-
     function setAttributes(node, attrs) {
         for (var attrName in attrs) {
             if (attrs.hasOwnProperty(attrName)) {
@@ -47,10 +33,13 @@ var lazyload = (function() {
         xhr.overrideMimeType('application/json')
         xhr.send()
         if (xhr.status === 200) {
-            console.log(xhr.status)
+            return JSON.parse(xhr.responseText)
+        } else {
+          console.log(xhr.status)
+          return []
         }
 
-        return JSON.parse(xhr.responseText)
+
     }
 
     var rander = function(count) {
